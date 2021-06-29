@@ -71,6 +71,9 @@ const ClassSelect = styled.div`
   border-radius:5px;
   cursor: pointer;
   box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
   &:hover{
     background: #ECECEC;
   }

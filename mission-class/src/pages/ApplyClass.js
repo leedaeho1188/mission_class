@@ -11,7 +11,7 @@ const ApplyClass = () => {
         <ApplyBox>
           <ApplyClassOption/>
           <ApplyClassBody>
-
+            
           </ApplyClassBody>
         </ApplyBox>
       </ApplyContainer>
