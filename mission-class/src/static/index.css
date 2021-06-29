@@ -35,6 +35,10 @@
   url("./fonts/NotoSansKR-Bold.otf") format('truetype')
 }
 
+html {
+  /* overflow-x: hidden; */
+}
+
 body {
   margin: 0;
   font-family: "Noto Sans CJK KR", sans-serif;

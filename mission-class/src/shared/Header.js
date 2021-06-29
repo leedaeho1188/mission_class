@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { history } from '../redux/configStore'
 
 const Header = () => {
 
@@ -10,7 +11,7 @@ const Header = () => {
           <LogoBox>미션 클래스</LogoBox>
           <PageMenuBox>
             <PageMenu>교육 안내</PageMenu>
-            <PageMenu>교육 신청</PageMenu>
+            <PageMenu onClick={()=>history.push('/apply')} >교육 신청</PageMenu>
             <PageMenu>교재 신청</PageMenu>
           </PageMenuBox>
           <ProfileBox>
@@ -36,6 +37,7 @@ const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
+  box-sizing: border-box;
 `
 
 const LogoBox = styled.button`
