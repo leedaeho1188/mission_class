@@ -51,13 +51,14 @@ const ApplyClassOption = (props) => {
 
 const OptionContainer = styled.div`
   display: flex;
-
+  margin-top:40px;
 `
 
 const ClassSelectBox = styled.div`
   display:flex;
   flex-direction: column;
   width: 200px;
+  position: relative;
 `
 
 const ClassSelect = styled.div`
@@ -71,9 +72,7 @@ const ClassSelect = styled.div`
   border-radius:5px;
   cursor: pointer;
   box-sizing: border-box;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
+  background: #FFFFFF;
   &:hover{
     background: #ECECEC;
   }
@@ -83,6 +82,12 @@ const ClassOptionBox = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 20px #00000026;
+  position: absolute;
+  width: 200px;
+  background-color: white;
+  left: 0;
+  top: 40px;
+  z-index: 10;
 `
 
 const Class_option = styled.div`
