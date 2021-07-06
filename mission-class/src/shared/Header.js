@@ -11,7 +11,7 @@ const Header = () => {
 
   return(
     <React.Fragment>
-      {mobileMenu? 
+      {/* {mobileMenu? 
         <MobileMenu setMobileMenu={setMobileMenu} />
         // <>
         //   <OuterContainer onClick={()=>{setMobileMenu(false)}} />
@@ -23,12 +23,12 @@ const Header = () => {
         //     </MenuBox>
         //   </MenuContainer>
         // </>
-        :null}
+        :null} */}
       <HeaderContainer>
         <HeaderBox>
-          <HeaderMenuIcon onClick={() => {setMobileMenu(true)}} >
+          {/* <HeaderMenuIcon onClick={() => {setMobileMenu(true)}} >
             <MenuIcon/>
-          </HeaderMenuIcon>
+          </HeaderMenuIcon> */}
           <LogoBox onClick={() => {history.push('/')}} >미션 클래스</LogoBox>
           <HeaderSearchIcon>
             <SearchIcon/>
@@ -63,7 +63,6 @@ const HeaderContainer = styled.div`
   z-index: 20;
 `
 
-
 const HeaderBox = styled.div`
 width: 1060px;
 display: flex;
@@ -71,6 +70,9 @@ justify-content: space-between;
 align-items: center;
 padding: 0 15px;
 box-sizing: border-box;
+@media (max-width:500px){
+  width: 100%;
+};
 `
 
 const HeaderMenuIcon = styled.div`
@@ -82,6 +84,7 @@ const HeaderMenuIcon = styled.div`
     display: none;
   }
 `
+
 const HeaderSearchIcon = styled.div`
   display: flex;
   align-items: center;

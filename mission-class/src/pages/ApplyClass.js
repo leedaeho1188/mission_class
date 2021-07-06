@@ -5,8 +5,6 @@ import ApplyClassBody from '../components/ApplyClassBody'
 
 const ApplyClass = () => {
 
-  console.log('하이')
-
   return(
     <React.Fragment>
       <ApplyContainer>
