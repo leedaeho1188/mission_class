@@ -23,7 +23,6 @@ const ApplyClass = () => {
 
 
 const ApplyContainer = styled.div`
-  margin-top: 50px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -31,6 +30,7 @@ const ApplyContainer = styled.div`
 
 const ApplyBox = styled.div`
   width: 1060px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   padding: 0px 15px;

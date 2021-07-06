@@ -1,14 +1,38 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
-import { history } from '../redux/configStore'
+import MenuIcon from '@material-ui/icons/Menu';
+import { history } from '../redux/configStore';
+import MobileMenu from "../components/MobileMenu"
+import SearchIcon from '@material-ui/icons/Search';
 
 const Header = () => {
+  const [mobileMenu, setMobileMenu] = useState(false);
+
 
   return(
     <React.Fragment>
+      {mobileMenu? 
+        <MobileMenu setMobileMenu={setMobileMenu} />
+        // <>
+        //   <OuterContainer onClick={()=>{setMobileMenu(false)}} />
+        //   <MenuContainer>
+        //     <MenuBox>
+        //       <MobilePageMenu onClick={() => {history.push('/'); setMobileMenu(false)}} >교육 안내</MobilePageMenu>
+        //       <MobilePageMenu onClick={()=>{history.push('/apply'); setMobileMenu(false)}} >교육 신청</MobilePageMenu>
+        //       <MobilePageMenu>게시판</MobilePageMenu>
+        //     </MenuBox>
+        //   </MenuContainer>
+        // </>
+        :null}
       <HeaderContainer>
         <HeaderBox>
+          <HeaderMenuIcon onClick={() => {setMobileMenu(true)}} >
+            <MenuIcon/>
+          </HeaderMenuIcon>
           <LogoBox onClick={() => {history.push('/')}} >미션 클래스</LogoBox>
+          <HeaderSearchIcon>
+            <SearchIcon/>
+          </HeaderSearchIcon>
           <PageMenuBox>
             <PageMenu onClick={() => {history.push('/')}} >교육 안내</PageMenu>
             <PageMenu onClick={()=>{history.push('/apply')}} >교육 신청</PageMenu>
@@ -39,12 +63,33 @@ const HeaderContainer = styled.div`
   z-index: 20;
 `
 
+
 const HeaderBox = styled.div`
-  width: 1060px;
+width: 1060px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 15px;
+box-sizing: border-box;
+`
+
+const HeaderMenuIcon = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 0 15px;
-  box-sizing: border-box;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  @media (min-width:500px){
+    display: none;
+  }
+`
+const HeaderSearchIcon = styled.div`
+  display: flex;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  @media (min-width:500px){
+    display: none;
+  }
 `
 
 const LogoBox = styled.button`
@@ -54,18 +99,24 @@ const LogoBox = styled.button`
   background: #ffffff;
   border: none;
   cursor: pointer;
+  @media (max-width:500px){
+    font-size: 14px;
+  }
 `
 
 const PageMenuBox = styled.div`
   display: flex;
-  // align-items: center;
+  @media (max-width:500px){
+    display: none;
+  }
 `
 
 const ProfileBox = styled.div`
   display: flex;
   align-items: center;
-
-
+  @media (max-width:500px){
+    display: none;
+  }
 `
 
 const PageMenu = styled.button`
@@ -87,6 +138,43 @@ const ProfileImg = styled.img`
   border-radius: 30px;
   object-fit: cover;
   cursor: pointer;
+  @media (max-width:500px){
+    height: 18px;
+    width: 18px;
+    border-radius: 18px;
+  }
+`
+
+const OuterContainer = styled.div`
+  z-index: 25;
+  background-color: black;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+
+`
+
+const MenuContainer = styled.div`
+  z-index: 30;
+  background-color: #FFFFFF;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+`
+
+const MenuBox = styled.div`
+  margin-top: 100px;
+  margin-left: 20px;
+`
+
+const MobilePageMenu = styled.div`
+  font-size: 20px;
+  font-family: Noto Sans CJK KR;
+  font-weight: 600;
+  margin-bottom: 18px;
 `
 
 export default Header
