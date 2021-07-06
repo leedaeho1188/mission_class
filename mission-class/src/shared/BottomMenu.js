@@ -1,28 +1,55 @@
 import React from 'react';
 import styled from 'styled-components';
-import HomeIcon from '@material-ui/icons/Home';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import MenuIcon from '@material-ui/icons/Menu';
-import PersonIcon from '@material-ui/icons/Person';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import {useSelector} from 'react-redux';
+import {consoleLog} from '../shared/consoleLog' 
+import {history} from '../redux/configStore'
+import {themeColor} from '../shared/color';
 
 const BottomMenu = () => {
+
+  const url = useSelector((state)=>state.router.location.pathname);
+
+  consoleLog(url)
 
   return(
     <React.Fragment>
       <BottomContainer>
+        {url === "/"? 
         <BottomIcon>
+          <HomeOutlinedIcon style={{fontSize:"30", color:themeColor}} />
+          <BottomIconText style={{color: themeColor}} >메인</BottomIconText>
+        </BottomIcon>
+        :
+        <BottomIcon onClick={()=>{history.push('/')}} >
           <HomeOutlinedIcon style={{fontSize:"30"}} />
           <BottomIconText>메인</BottomIconText>
         </BottomIcon>
+        }
+        {url === "/class"? 
         <BottomIcon>
+          <MenuIcon style={{fontSize:"30", color:themeColor}} />
+          <BottomIconText style={{color:themeColor}} >수업</BottomIconText>
+        </BottomIcon>
+        :
+        <BottomIcon onClick={()=>{history.push('/class')}} >
           <MenuIcon style={{fontSize:"30"}} />
           <BottomIconText>수업</BottomIconText>
         </BottomIcon>
+        }
+        {url === "/profile"? 
         <BottomIcon>
+          <PersonOutlineIcon style={{fontSize:"30", color:themeColor}} />
+          <BottomIconText style={{color:themeColor}}>프로필</BottomIconText>
+        </BottomIcon>
+        :
+        <BottomIcon onClick={()=>{history.push('/profile')}} >
           <PersonOutlineIcon style={{fontSize:"30"}} />
           <BottomIconText>프로필</BottomIconText>
         </BottomIcon>
+        }
       </BottomContainer>
     </React.Fragment>
   )
