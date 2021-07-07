@@ -29,7 +29,7 @@ const Header = () => {
           {/* <HeaderMenuIcon onClick={() => {setMobileMenu(true)}} >
             <MenuIcon/>
           </HeaderMenuIcon> */}
-          <LogoBox onClick={() => {history.push('/')}} >미션 클래스</LogoBox>
+          <LogoBox onClick={() => {history.push('/')}} >지저스 키친</LogoBox>
           <HeaderSearchIcon>
             <SearchIcon/>
           </HeaderSearchIcon>
@@ -103,7 +103,7 @@ const LogoBox = styled.button`
   border: none;
   cursor: pointer;
   @media (max-width:500px){
-    font-size: 14px;
+    font-size: 15px;
   }
 `
 
