@@ -28,7 +28,7 @@ const BottomMenu = () => {
           <BottomIconText>메인</BottomIconText>
         </BottomIcon>
         }
-        {url === "/class"? 
+        {url.includes("/class")? 
         <BottomIcon>
           <MenuIcon style={{fontSize:"30", color:themeColor}} />
           <BottomIconText style={{color:themeColor}} >수업</BottomIconText>
@@ -39,7 +39,7 @@ const BottomMenu = () => {
           <BottomIconText>수업</BottomIconText>
         </BottomIcon>
         }
-        {url === "/profile"? 
+        {url.includes("/profile")? 
         <BottomIcon>
           <PersonOutlineIcon style={{fontSize:"30", color:themeColor}} />
           <BottomIconText style={{color:themeColor}}>프로필</BottomIconText>

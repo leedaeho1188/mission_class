@@ -3,12 +3,13 @@ import styled from  'styled-components'
 import ApplyClassOption from '../components/ApplyClassOption'
 import ApplyClassBody from '../components/ApplyClassBody'
 import ClassList from '../components/ClassList'
-
+import AddClassBtn from '../shared/AddClassBtn';
 
 const Class = () => {
 
   return(
     <React.Fragment>
+      <AddClassBtn/>
       <ClassContainer>
         <ClassBox>
           <ClassBody>

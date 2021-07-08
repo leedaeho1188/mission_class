@@ -8,7 +8,8 @@ import Class from './pages/Class';
 import Main from './pages/Main';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-import Oauth from './pages/Oauth'
+import Oauth from './pages/Oauth';
+import ClassAdd from './pages/ClassAdd';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/profile" component={Profile}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/oauth" component={Oauth}/>
+            <Route exact path="/class/add" component={ClassAdd}/>
           </Switch>
         </ConnectedRouter>
     </React.Fragment>
