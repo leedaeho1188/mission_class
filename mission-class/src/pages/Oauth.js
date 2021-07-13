@@ -1,19 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useDispatch} from "react-redux";
+import axios from "axios";
+import { setCookie, getCookie } from '../shared/Cookie';
 import {api as userActions} from "../redux/modules/user"
 import {consoleLog} from "../shared/consoleLog"
 
 
-const Oauth = () => {
+const Oauth = (props) => {
   const dispatch = useDispatch()
-  const code = new URL(window.location.href).searchParams.get("code");
-
-  consoleLog(code)
+  const jwtToken = props.match.params.id;
 
 
   React.useEffect(() => {
-    dispatch(userActions.SocialLogin(code))
+    setCookie("is_login", jwtToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${getCookie(
+      "is_login"
+    )}`;
+    dispatch(userActions.SocialLogin())
   },[])
 
 

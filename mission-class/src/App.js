@@ -23,7 +23,7 @@ function App() {
             <Route exact path="/class" component={Class}/>
             <Route exact path="/profile" component={Profile}/>
             <Route exact path="/login" component={Login}/>
-            <Route exact path="/oauth" component={Oauth}/>
+            <Route exact path="/auth/:id" component={Oauth}/>
             <Route exact path="/class/add" component={ClassAdd}/>
           </Switch>
         </ConnectedRouter>

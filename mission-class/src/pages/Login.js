@@ -9,7 +9,7 @@ const Login = () => {
       <LoginContainer>
         <LoginBox>
           <LoginHeader>로그인</LoginHeader>
-          <LoginButton href="https://kauth.kakao.com/oauth/authorize?client_id=68a1e51e217b3f360767faf6c34f4b03&redirect_uri=http://localhost:3000/oauth&response_type=code" >
+          <LoginButton href="" >
             <LoginButtonIcon src={KaKaoIcon} />
             <LoginButtonText>카카오로 로그인</LoginButtonText>
           </LoginButton>

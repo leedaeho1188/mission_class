@@ -9,6 +9,10 @@ axios.defaults.baseURL = "http://54.180.139.155:27017";
 const userSlice = createSlice({
   name: "user",
   initialState: {
+    is_login: false,
+    user:{
+      
+    },
 
   },
   reducers: {
@@ -19,7 +23,7 @@ const userSlice = createSlice({
 const SocialLogin = (code) => {
   return function(dispatch, getState){
     axios
-      .get(`/auth/kakao?code=${code}`)
+      .get(`/auth/kakao`)
       .then((response) => {
         consoleLog(response);
         history.replace('/');
@@ -31,7 +35,7 @@ const SocialLogin = (code) => {
 }
 
 export const {
-  
+
 } = userSlice.actions;
 
 export const api = {

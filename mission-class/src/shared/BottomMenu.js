@@ -11,6 +11,7 @@ import {themeColor} from '../shared/color';
 const BottomMenu = () => {
 
   const url = useSelector((state)=>state.router.location.pathname);
+  const is_login = useSelector((state)=>state.user.is_login);
 
   consoleLog(url)
 
@@ -18,7 +19,7 @@ const BottomMenu = () => {
     <React.Fragment>
       <BottomContainer>
         {url === "/"? 
-        <BottomIcon>
+        <BottomIcon onClick={()=>{history.push('/')}}>
           <HomeOutlinedIcon style={{fontSize:"30", color:themeColor}} />
           <BottomIconText style={{color: themeColor}} >메인</BottomIconText>
         </BottomIcon>
@@ -29,7 +30,7 @@ const BottomMenu = () => {
         </BottomIcon>
         }
         {url.includes("/class")? 
-        <BottomIcon>
+        <BottomIcon onClick={()=>{history.push('/class')}}>
           <MenuIcon style={{fontSize:"30", color:themeColor}} />
           <BottomIconText style={{color:themeColor}} >수업</BottomIconText>
         </BottomIcon>
@@ -40,12 +41,24 @@ const BottomMenu = () => {
         </BottomIcon>
         }
         {url.includes("/profile")? 
-        <BottomIcon>
+        <BottomIcon onClick={()=>{
+          if(is_login){
+            history.push('/profile');
+          }else{
+            history.push('/login');
+          }
+          }}>
           <PersonOutlineIcon style={{fontSize:"30", color:themeColor}} />
           <BottomIconText style={{color:themeColor}}>프로필</BottomIconText>
         </BottomIcon>
         :
-        <BottomIcon onClick={()=>{history.push('/profile')}} >
+        <BottomIcon onClick={()=>{
+          if(is_login){
+            history.push('/profile');
+          }else{
+            history.push('/login');
+          }
+        }} >
           <PersonOutlineIcon style={{fontSize:"30"}} />
           <BottomIconText>프로필</BottomIconText>
         </BottomIcon>

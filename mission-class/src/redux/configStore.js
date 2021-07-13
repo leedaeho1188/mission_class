@@ -2,11 +2,15 @@ import { combineReducers } from "redux";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
+import User from "./modules/user";
+import Class from "./modules/class";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
+  user: User,
+  class: Class,
 });
 
 const middlewares = [
