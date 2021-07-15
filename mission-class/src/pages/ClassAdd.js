@@ -9,8 +9,8 @@ const ClassAdd = () => {
   const [classCtgOption, setClassCtgOption] = useState(false);
   const [className, setClassName] = useState("");
   const [classIntroduce, setClassIntroduce] = useState("");
-  const [Image, setImage] = useState(false)
-  
+  const [Image, setImage] = useState(false);
+
 
   const changeClassName = (e) => {
     if(e.target.value.length > 40){
@@ -35,7 +35,6 @@ const ClassAdd = () => {
           </ClassAddHeader>
           <ClassAddBody>
             <div style={{display:"flex", justifyContent: "space-between"}}>
-
               <ClassSelectBox>
                 <ClassSelect onClick={() => {
               if(classLocOption){setClassLocOption(false)}
@@ -130,14 +129,13 @@ const ClassAdd = () => {
               </div>
             </ClassIntroduce>
             <ClassAddBtn>
-              
+              다음
             </ClassAddBtn>
           </ClassAddBody>
         </ClassAddBox>
       </ClassAddContainer>
     </React.Fragment>
   )
-
 }
 
 const ClassAddContainer = styled.div`
@@ -151,9 +149,8 @@ const ClassAddBox = styled.div`
   margin-top: 50px;
   margin-bottom: 60px;
   flex-direction: column;
-  padding: 0px 15px;
+  padding: 0px 30px;
   box-sizing: border-box;
-
 `
 
 const ClassAddHeader = styled.div`
@@ -162,7 +159,7 @@ const ClassAddHeader = styled.div`
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  margin-top: 20px;
+  margin-top: 15px;
 `
 
 const ClassAddBody = styled.div`
@@ -173,7 +170,7 @@ const ClassAddBody = styled.div`
 const ClassName = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 10px;
 `
 
 const ClassLabel = styled.label`
@@ -200,7 +197,7 @@ const ClassNameInput = styled.input`
 const ClassIntroduce = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 10px;
 `
 
 const ClassIntroduceInput = styled.textarea`
@@ -269,7 +266,7 @@ box-sizing: border-box;
 const ClassImgBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 15px;
 `
 
 const ClassNameCount = styled.div`
@@ -292,10 +289,13 @@ const ClassAddBtn = styled.div`
   justify-content: center;
   align-items: center;
   height: 50px;
-  font-size: 15px;
-  color: #FFFFFF;
-
-
+  font-size: 17px;
+  // color: #FFFFFF;
+  font-weight: 600;
+  background-color: ${lightColor};
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 
 `
 

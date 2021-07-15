@@ -8,7 +8,7 @@ const AddClassBtn = () => {
 
   return(
     <React.Fragment>
-      <Button onClick={()=>{history.push('/class/add')}} >
+      <Button onClick={()=>{history.push('/classAdd')}} >
         <AddIcon style={{color: '#FFFFFF', fontSize:"35px"}} />
       </Button>
     </React.Fragment>

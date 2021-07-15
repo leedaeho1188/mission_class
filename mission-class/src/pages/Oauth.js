@@ -9,7 +9,10 @@ import {consoleLog} from "../shared/consoleLog"
 
 const Oauth = (props) => {
   const dispatch = useDispatch()
-  const jwtToken = props.match.params.id;
+  const jwtToken = props.match;
+
+
+  console.log(jwtToken, "Oauth.js")
 
 
   React.useEffect(() => {
@@ -17,7 +20,7 @@ const Oauth = (props) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${getCookie(
       "is_login"
     )}`;
-    dispatch(userActions.SocialLogin())
+    // dispatch(userActions.SocialLogin())
   },[])
 
 

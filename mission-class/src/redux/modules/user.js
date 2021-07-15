@@ -3,7 +3,7 @@ import axios from "axios";
 import {consoleLog} from '../../shared/consoleLog'
 import { history } from "../configStore";
 
-axios.defaults.baseURL = "http://54.180.139.155:27017";
+axios.defaults.baseURL = "http://54.180.139.155";
 
 
 const userSlice = createSlice({
@@ -16,16 +16,31 @@ const userSlice = createSlice({
 
   },
   reducers: {
-
-  },
+    setUser: (state, action) => {
+      state.user = action.payload;
+      state.is_login = true;
+    },
+  }
 });
 
-const SocialLogin = (code) => {
+const SocialLogin = () => {
   return function(dispatch, getState){
     axios
-      .get(`/auth/kakao`)
-      .then((response) => {
-        consoleLog(response);
+      .get(`/auth/user`)
+      .then((res) => {
+        consoleLog(res,"user.js");
+        dispatch(
+          setUser({
+            name: res.data.name,
+            profileImg: res.data.profileImg,
+            churchName: res.data.churchName,
+            churchDuty: res.data.churchDuty,
+            introduce: res.data.introduce,
+            job: res.data.job,
+            phoneNumber: res.data.phoneNumber,
+            first: res.data.first,
+          })
+        )
         history.replace('/');
       })
       .catch((err)=>{
@@ -35,6 +50,7 @@ const SocialLogin = (code) => {
 }
 
 export const {
+  setUser,
 
 } = userSlice.actions;
 

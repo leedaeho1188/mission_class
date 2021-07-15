@@ -4,12 +4,14 @@ import {ConnectedRouter} from "connected-react-router";
 import { Route, Switch } from "react-router-dom";
 import Header from './shared/Header';
 import BottomMenu from './shared/BottomMenu';
-import Class from './pages/Class';
+import Class from './pages/ClassList';
 import Main from './pages/Main';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Oauth from './pages/Oauth';
 import ClassAdd from './pages/ClassAdd';
+import Signup from './pages/Signup';
+import ClassDetail from './pages/ClassDetail';
 
 
 function App() {
@@ -21,10 +23,12 @@ function App() {
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/class" component={Class}/>
+            <Route exact path="/class/:name" component={ClassDetail}/>
             <Route exact path="/profile" component={Profile}/>
             <Route exact path="/login" component={Login}/>
-            <Route exact path="/auth/:id" component={Oauth}/>
-            <Route exact path="/class/add" component={ClassAdd}/>
+            <Route exact path="/auth" component={Oauth}/>
+            <Route exact path="/classAdd" component={ClassAdd}/>
+            <Route exact path="/signup" component={Signup}/>
           </Switch>
         </ConnectedRouter>
     </React.Fragment>

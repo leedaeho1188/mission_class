@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import swal from "sweetalert";
 import {useSelector} from 'react-redux';
 import {consoleLog} from '../shared/consoleLog' 
 import {history} from '../redux/configStore'
@@ -43,8 +44,14 @@ const BottomMenu = () => {
         {url.includes("/profile")? 
         <BottomIcon onClick={()=>{
           if(is_login){
+            
             history.push('/profile');
           }else{
+            swal({
+              title: "먼저 로그인을 해주세요.",
+              text: `로그인 페이지로 이동하겠습니다.`,
+              icon: "error",
+            });
             history.push('/login');
           }
           }}>
@@ -54,8 +61,14 @@ const BottomMenu = () => {
         :
         <BottomIcon onClick={()=>{
           if(is_login){
+            
             history.push('/profile');
           }else{
+            swal({
+              title: "먼저 로그인을 해주세요.",
+              text: `로그인 페이지로 이동하겠습니다.`,
+              icon: "error",
+            });
             history.push('/login');
           }
         }} >

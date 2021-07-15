@@ -2,10 +2,10 @@ import React from  'react'
 import styled from  'styled-components'
 import ApplyClassOption from '../components/ApplyClassOption'
 import ApplyClassBody from '../components/ApplyClassBody'
-import ClassList from '../components/ClassList'
+import Class from '../components/Class'
 import AddClassBtn from '../shared/AddClassBtn';
 
-const Class = () => {
+const ClassList = () => {
 
   return(
     <React.Fragment>
@@ -13,10 +13,10 @@ const Class = () => {
       <ClassContainer>
         <ClassBox>
           <ClassBody>
-            <ClassList/>
-            <ClassList/>
-            <ClassList/>
-            <ClassList/>
+            <Class/>
+            <Class/>
+            <Class/>
+            <Class/>
           </ClassBody>
         </ClassBox>
       </ClassContainer>
@@ -57,4 +57,4 @@ const ClassBody = styled.div`
 
 `
 
-export default Class
+export default ClassList
