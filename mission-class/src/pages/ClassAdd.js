@@ -1,16 +1,28 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import {themeColor, lightColor, darkColor} from '../shared/color'
+import { useDispatch } from 'react-redux';
 import { LeftOutlined } from "@ant-design/icons";
-import ClassImgUpload from '../components/ClassImgUpload';
+import {themeColor, lightColor, darkColor} from '../shared/color'
+import ClassAdd1 from '../components/ClassAdd1';
+import ClassAdd2 from '../components/ClassAdd2';
+import { setPreview } from '../redux/modules/class';
 
 const ClassAdd = () => {
   const [classLocOption, setClassLocOption] = useState(false);
   const [classCtgOption, setClassCtgOption] = useState(false);
+  const [classLoc, setClassLoc] = useState("");
+  const [classCtg, setClassCtg] = useState("");
   const [className, setClassName] = useState("");
   const [classIntroduce, setClassIntroduce] = useState("");
   const [Image, setImage] = useState(false);
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
 
+  React.useEffect(() => {
+    return() => {
+      dispatch(setPreview(null))
+    }
+  }, [])
 
   const changeClassName = (e) => {
     if(e.target.value.length > 40){
@@ -26,112 +38,53 @@ const ClassAdd = () => {
     setClassIntroduce(e.target.value);
   }
 
+
   return(
     <React.Fragment>
       <ClassAddContainer>
         <ClassAddBox>
+          {page !== 1?
+            <LeftOutlined
+              style={{
+                color: "black",
+                fontSize: "16px",
+                marginLeft:'5px',
+                position: "absolute",
+                top: "18px",
+              }}
+              onClick={()=> {setPage(page - 1)}}
+            />
+          :
+            null
+          }
           <ClassAddHeader>
             수업 추가
           </ClassAddHeader>
-          <ClassAddBody>
-            <div style={{display:"flex", justifyContent: "space-between"}}>
-              <ClassSelectBox>
-                <ClassSelect onClick={() => {
-              if(classLocOption){setClassLocOption(false)}
-              else{setClassLocOption(true)}
-              }} >
-                    주최 단체
-                  {classLocOption? 
-                    <LeftOutlined
-                      style={{
-                        color: "black",
-                        fontSize: "12px",
-                        transform:'rotateZ(90deg)',
-                        marginLeft:'5px'
-                      }}
-                    />
-                    :
-                    <LeftOutlined
-                      style={{
-                        color: "black",
-                        fontSize: "12px",
-                        transform:'rotateZ(270deg)',
-                        marginLeft:'5px'
-                      }}
-                    />
-                    }
-                </ClassSelect>
-                {classLocOption? 
-                  <ClassOptionBox>
-                    <ClassOption>수원 화평교회</ClassOption>
-                  </ClassOptionBox>
-                :null}
-              </ClassSelectBox>
-              <ClassSelectBox>
-                <ClassSelect onClick={() => {
-              if(classCtgOption){setClassCtgOption(false)}
-              else{setClassCtgOption(true)}
-              }} >
-                    카테고리
-                  {classCtgOption? 
-                    <LeftOutlined
-                      style={{
-                        color: "black",
-                        fontSize: "12px",
-                        transform:'rotateZ(90deg)',
-                        marginLeft:'5px'
-                      }}
-                    />
-                    :
-                    <LeftOutlined
-                      style={{
-                        color: "black",
-                        fontSize: "12px",
-                        transform:'rotateZ(270deg)',
-                        marginLeft:'5px'
-                      }}
-                    />
-                    }
-                </ClassSelect>
-                {classCtgOption? 
-                  <ClassOptionBox>
-                    <ClassOption>커피</ClassOption>
-                  </ClassOptionBox>
-                :null}
-              </ClassSelectBox>
-            </div>
-            
-            <ClassImgBox>
-              <ClassLabel>수업 사진</ClassLabel>
-              <ClassImgUpload setImage={setImage} />
-            </ClassImgBox>
-
-            <ClassName>
-              <ClassLabel for="className" >수업 이름</ClassLabel>
-              <div style={{position:"relative"}} >
-                <ClassNameInput
-                  id="className"
-                  value={className}
-                  onChange={changeClassName}
-                />
-                <ClassNameCount>{className.length}/40</ClassNameCount>
-              </div>
-            </ClassName>
-            <ClassIntroduce>
-              <ClassLabel for="classIntroduce">수업 소개</ClassLabel>
-              <div style={{position: "relative"}}>
-                <ClassIntroduceInput
-                  id="classIntroduce"
-                  value={classIntroduce}
-                  onChange={changeClassIntroduce}
-                />
-                <ClassIntroduceCount>{classIntroduce.length}/1000</ClassIntroduceCount>
-              </div>
-            </ClassIntroduce>
-            <ClassAddBtn>
-              다음
-            </ClassAddBtn>
-          </ClassAddBody>
+          {page === 1? 
+            <ClassAdd1 
+              classLocOption={classLocOption} 
+              classCtgOption={classCtgOption}
+              setClassLocOption={setClassLocOption}
+              setClassCtgOption={setClassCtgOption}
+              classLoc={classLoc}
+              classCtg={classCtg}
+              setClassCtg={setClassCtg}
+              setClassLoc={setClassLoc}
+              changeClassName={changeClassName}
+              changeClassIntroduce={changeClassIntroduce}
+              className={className}
+              classIntroduce={classIntroduce}
+              setImage={setImage}
+              Image={Image}
+              setPage={setPage}
+            />
+          :
+          null
+          }
+          {page === 2? 
+            <ClassAdd2/>
+          :
+          null}
         </ClassAddBox>
       </ClassAddContainer>
     </React.Fragment>
@@ -151,6 +104,7 @@ const ClassAddBox = styled.div`
   flex-direction: column;
   padding: 0px 30px;
   box-sizing: border-box;
+  position: relative;
 `
 
 const ClassAddHeader = styled.div`

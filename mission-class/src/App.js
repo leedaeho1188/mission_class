@@ -12,6 +12,7 @@ import Oauth from './pages/Oauth';
 import ClassAdd from './pages/ClassAdd';
 import Signup from './pages/Signup';
 import ClassDetail from './pages/ClassDetail';
+import ProfileUpdate from './pages/ProfileUpdate'
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
             <Route exact path="/class/:name" component={ClassDetail}/>
             <Route exact path="/profile" component={Profile}/>
             <Route exact path="/login" component={Login}/>
-            <Route exact path="/auth" component={Oauth}/>
+            <Route exact path="/auth/:id" component={Oauth}/>
             <Route exact path="/classAdd" component={ClassAdd}/>
             <Route exact path="/signup" component={Signup}/>
           </Switch>
