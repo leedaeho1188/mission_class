@@ -272,7 +272,6 @@ const ClassAddBtn = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
-
 `
 
 export default ClassAdd1

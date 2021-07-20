@@ -2,6 +2,7 @@ import React from 'react';
 import {history} from "./redux/configStore";
 import {ConnectedRouter} from "connected-react-router";
 import { Route, Switch } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import Header from './shared/Header';
 import BottomMenu from './shared/BottomMenu';
 import Class from './pages/ClassList';
@@ -12,10 +13,22 @@ import Oauth from './pages/Oauth';
 import ClassAdd from './pages/ClassAdd';
 import Signup from './pages/Signup';
 import ClassDetail from './pages/ClassDetail';
-import ProfileUpdate from './pages/ProfileUpdate'
+import ProfileUpdate from './pages/ProfileUpdate';
+import {api as userActions} from './redux/modules/user';
+import {getCookie} from './shared/Cookie';
+
 
 
 function App() {
+  const dispatch = useDispatch();
+  const cookie = getCookie("is_login") ? true : false;
+
+  React.useEffect(()=>{
+    if(cookie){
+      dispatch(userActions.LoginCheck())
+    }
+  },[])
+
   return (
     <React.Fragment>
       <Header/>
@@ -30,6 +43,7 @@ function App() {
             <Route exact path="/auth/:id" component={Oauth}/>
             <Route exact path="/classAdd" component={ClassAdd}/>
             <Route exact path="/signup" component={Signup}/>
+            <Route exact path="/profile/update" component={ProfileUpdate}/>
           </Switch>
         </ConnectedRouter>
     </React.Fragment>
