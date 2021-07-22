@@ -65,7 +65,53 @@ const LoginCheck = () => {
   }
 }
 
+const UpdateUserProfile = (profile) => {
+  return function (dispatch, getState){
+    const _image = getState().user.preview;
+    const _profileImg = getState().user.user.profileImg;
+    const is_first = getState().user.user.fisrt;
 
+    if(_image !== _profileImg) {
+      const formData = new FormData();
+      formData.append('profileImg', profile.profileImg);
+      formData.append('name', profile.name);
+      formData.append('nickname', profile.nickname);
+      formData.append('churchName', profile.churchName);
+      formData.append('churchDuty', profile.churchDuty);
+      formData.append('job', profile.job);
+      formData.append('phoneNumber', profile.phoneNumber);
+      formData.append('introduce', profile.introduce);
+      axios
+        .patch(`/auth/user`, formData)
+        .then((res) => {
+          console.log(res.data)
+          alert('회원가입을 축하드립니다.')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else{
+      const formData = new FormData();
+      formData.append('name', profile.name);
+      formData.append('nickname', profile.nickname);
+      formData.append('churchName', profile.churchName);
+      formData.append('churchDuty', profile.churchDuty);
+      formData.append('job', profile.job);
+      formData.append('phoneNumber', profile.phoneNumber);
+      formData.append('introduce', profile.introduce);
+      axios
+        .patch(`/auth/user`, formData)
+        .then((res) => {
+          console.log(res.data)
+          alert('회원가입을 축하드립니다.')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
+  }
+}
 
 export const {
   setUser,
@@ -75,6 +121,7 @@ export const {
 export const api = {
   SocialLogin,
   LoginCheck,
+  UpdateUserProfile,
 };
 
 export default userSlice.reducer;

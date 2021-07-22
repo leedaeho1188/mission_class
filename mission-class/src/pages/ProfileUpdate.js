@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Select} from  'antd';
+import {useDispatch} from 'react-redux'
 import ProfileImgUpload from '../components/ProfileImgUpload';
 import {lightColor} from '../shared/color'
+import {api as userActions} from '../redux/modules/user'
 
 const ProfileUpdate = () => {
+  const dispatch = useDispatch()
+  
   const [Image, setImage] = useState();
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
@@ -53,7 +57,7 @@ const ProfileUpdate = () => {
   }
 
   const SubmitSignUp = () => {
-    const userInfo = {
+    const profile = {
       profileImg: Image,
       name: name,
       nickname: nickname,
@@ -61,8 +65,10 @@ const ProfileUpdate = () => {
       churchDuty: churchDuty,
       job: userJob,
       phoneNumber: phoneNumber,
+      introduce:"안녕하세요."
     }
 
+    dispatch(userActions.UpdateUserProfile(profile))
   }
 
   return(
@@ -137,7 +143,9 @@ const ProfileUpdate = () => {
           </ProfileUpdateBody>
           {Image && name && nickname && churchName && churchDuty && phoneNumber && userJob? 
           <ProfileUpdateBottom>
-            <ProfileSubmitBtn onClick={SubmitSignUp} >회원가입 하기</ProfileSubmitBtn>
+            <ProfileSubmitBtn onClick={()=>{
+              SubmitSignUp()
+            } } >회원가입 하기</ProfileSubmitBtn>
           </ProfileUpdateBottom>
           :
           <ProfileUpdateBottom>
