@@ -1,26 +1,36 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { LeftOutlined } from "@ant-design/icons";
 import {themeColor, lightColor, darkColor} from '../shared/color'
 import ClassAdd1 from '../components/ClassAdd1';
 import ClassAdd2 from '../components/ClassAdd2';
-import { setPreview } from '../redux/modules/class';
+import { setPreview,setTeacherImgPreview, api as classActions } from '../redux/modules/class';
 
-const ClassAdd = () => {
+const ClassAdd = React.memo(() => {
   const [classLocOption, setClassLocOption] = useState(false);
   const [classCtgOption, setClassCtgOption] = useState(false);
+  const [classDayOption, setClassDayOption] = useState(false);
+  const [classDay, setClassDay] = useState("");
   const [classLoc, setClassLoc] = useState("");
   const [classCtg, setClassCtg] = useState("");
   const [className, setClassName] = useState("");
   const [classIntroduce, setClassIntroduce] = useState("");
   const [Image, setImage] = useState(false);
   const [page, setPage] = useState(1);
+  const [teacherImg, setTeacherImg] = useState(false);
+  const [teacherName, setTeacherName] = useState("");
+  const [availableCnt, setAvailableCnt] = useState();
+
+  const startTime = useRef();
+  const endTime = useRef();
+
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     return() => {
-      dispatch(setPreview(null))
+      dispatch(setPreview(null));
+      dispatch(setTeacherImgPreview(null));
     }
   }, [])
 
@@ -38,6 +48,37 @@ const ClassAdd = () => {
     setClassIntroduce(e.target.value);
   }
 
+  const changeTeacherName = (e) => {
+    setTeacherName(e.target.value);
+  }
+
+  const changeAvailableCnt = (e) => {
+    setAvailableCnt(e.target.value)
+  }
+
+  const AddClass = () => {
+
+    if(startTime.current.value.split(':')[0] >= endTime.current.value.split(':')[0]){
+      alert('수업 시작 시간이 끝나는 시간보다 늦으면 안됩니다.')
+      return
+    }
+
+    const classInfo = {
+      category: classCtg,
+      classTitle: className,
+      classIntroduce: classIntroduce,
+      classPicture: Image,
+      classPlace: classLoc,
+      classDay: classDay,
+      classStartTime: startTime.current.value,
+      classEndTime: endTime.current.value,
+      teacherName: teacherName,
+      teacherImg: teacherImg,
+      availableCnt: availableCnt,
+
+    }
+    dispatch(classActions.AddClass(classInfo))
+  }
 
   return(
     <React.Fragment>
@@ -82,14 +123,29 @@ const ClassAdd = () => {
           null
           }
           {page === 2? 
-            <ClassAdd2/>
+            <ClassAdd2
+              startTime={startTime}
+              endTime={endTime}
+              classDayOption={classDayOption}
+              setClassDayOption={setClassDayOption}
+              classDay={classDay}
+              setClassDay={setClassDay}
+              setTeacherImg={setTeacherImg}
+              teacherImg={teacherImg}
+              teacherName={teacherName}
+              setTeacherName={setTeacherName}
+              changeTeacherName={changeTeacherName}
+              AddClass={AddClass}
+              availableCnt={availableCnt}
+              changeAvailableCnt={changeAvailableCnt}
+            />
           :
           null}
         </ClassAddBox>
       </ClassAddContainer>
     </React.Fragment>
   )
-}
+})
 
 const ClassAddContainer = styled.div`
   width: 100%;

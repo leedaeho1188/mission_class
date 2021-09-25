@@ -122,15 +122,15 @@ const ClassAdd1 = (props) => {
               props.classCtg && 
               props.classIntroduce &&
               props.classLoc? 
-              <ClassAddBtn onClick={()=>{
+              <NextBtn onClick={()=>{
                 props.setPage(2)
               }} >
                 다음
-              </ClassAddBtn>
+              </NextBtn>
               :
-              <ClassAddBtn style={{backgroundColor:"#757575"}} >
+              <NextBtn style={{backgroundColor:"#757575"}} >
                 다음
-              </ClassAddBtn>
+              </NextBtn>
               }
       </ClassAdd1Body>
     </React.Fragment>
@@ -259,7 +259,7 @@ const ClassIntroduceCount = styled.div`
   font: normal normal normal 12px/18px Noto Sans CJK KR;
 `
 
-const ClassAddBtn = styled.div`
+const NextBtn = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;

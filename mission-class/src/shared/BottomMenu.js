@@ -96,6 +96,7 @@ const BottomContainer = styled.div`
   align-items: center;
   padding: 0 25px;
   box-sizing: border-box;
+  z-index: 5;
   @media (min-width:500px){
     display: none;
   }

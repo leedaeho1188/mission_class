@@ -1,11 +1,17 @@
 import React from  'react'
 import styled from  'styled-components'
-import ApplyClassOption from '../components/ApplyClassOption'
-import ApplyClassBody from '../components/ApplyClassBody'
+import { useDispatch, useSelector } from 'react-redux';
 import Class from '../components/Class'
 import AddClassBtn from '../shared/AddClassBtn';
+import {api as classActions} from '../redux/modules/class';
 
 const ClassList = () => {
+  const dispatch = useDispatch();
+  const classList = useSelector((state) => state.class.classList)
+
+  React.useEffect(() => {
+    dispatch(classActions.getClassList());
+  }, [])
 
   return(
     <React.Fragment>
@@ -13,10 +19,11 @@ const ClassList = () => {
       <ClassContainer>
         <ClassBox>
           <ClassBody>
-            <Class/>
-            <Class/>
-            <Class/>
-            <Class/>
+            {classList.map((c) => {
+              return(
+                <Class key={c.id} {...c} />
+              )
+            })}
           </ClassBody>
         </ClassBox>
       </ClassContainer>

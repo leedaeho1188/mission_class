@@ -14,6 +14,8 @@ import ClassAdd from './pages/ClassAdd';
 import Signup from './pages/Signup';
 import ClassDetail from './pages/ClassDetail';
 import ProfileUpdate from './pages/ProfileUpdate';
+import ApplyAdmin from './pages/ApplyAdmin';
+import Admin from './pages/Admin';
 import {api as userActions} from './redux/modules/user';
 import {getCookie} from './shared/Cookie';
 
@@ -40,10 +42,12 @@ function App() {
             <Route exact path="/class/:name" component={ClassDetail}/>
             <Route exact path="/profile" component={Profile}/>
             <Route exact path="/login" component={Login}/>
-            <Route exact path="/auth/:id" component={Oauth}/>
+            <Route exact path="/passport/auth/:id" component={Oauth}/>
             <Route exact path="/classAdd" component={ClassAdd}/>
             <Route exact path="/signup" component={Signup}/>
             <Route exact path="/profile/update" component={ProfileUpdate}/>
+            <Route exact path="/admin/apply" component={ApplyAdmin}/>
+            <Route exact path="/admin" component={Admin}/>
           </Switch>
         </ConnectedRouter>
     </React.Fragment>

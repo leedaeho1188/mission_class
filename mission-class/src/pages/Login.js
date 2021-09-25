@@ -9,7 +9,7 @@ const Login = () => {
       <LoginContainer>
         <LoginBox>
           <LoginHeader>로그인</LoginHeader>
-          <LoginButton href="http://54.180.139.155/auth/kakao" >
+          <LoginButton href="http://54.180.139.155/passport/auth/kakao" >
             <LoginButtonIcon src={KaKaoIcon} />
             <LoginButtonText>카카오로 로그인</LoginButtonText>
           </LoginButton>

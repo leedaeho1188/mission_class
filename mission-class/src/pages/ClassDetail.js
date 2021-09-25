@@ -1,7 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import {api as classActions} from '../redux/modules/class';
+
 
 const ClassDetail = () => {
+
+  const dispatch = useDispatch();
+  const classList = useSelector((state) => state.class.classList);
+  
+
+  React.useEffect(() => {
+    dispatch(classActions.getClassList());
+  }, [])
 
   return(
     <React.Fragment>

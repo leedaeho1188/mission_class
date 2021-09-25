@@ -4,6 +4,7 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 import User from "./modules/user";
 import Class from "./modules/class";
+import Admin from "./modules/admin";
 
 export const history = createBrowserHistory();
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   router: connectRouter(history),
   user: User,
   class: Class,
+  admin: Admin,
 });
 
 const middlewares = [

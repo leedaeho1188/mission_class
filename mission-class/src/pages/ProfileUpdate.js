@@ -16,7 +16,8 @@ const ProfileUpdate = () => {
   const [churchDuty, setChurchDuty] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [userJob, setUserJob] = useState('');
-
+  const [churchAttendance, setChurchAttendance] = useState('');
+  
   const changeProfileName = (e) => {
     if(name.length > 5){
       return
@@ -46,7 +47,13 @@ const ProfileUpdate = () => {
   }
 
   const changePhoneNumber = (e) => {
-    if(phoneNumber.length > 13){
+    const regNumber = /^[0-9]*$/;
+    if(!regNumber.test(e.target.value)){
+      alert("숫자만 입력하세요.")
+      return
+    }
+
+    if(e.target.value.length > 11){
       return
     }
     setPhoneNumber(e.target.value);
@@ -56,7 +63,27 @@ const ProfileUpdate = () => {
     setUserJob(e.target.value);
   }
 
+  const changeChurchAttendance = (e) => {
+    setChurchAttendance(e.target.value);
+  }
+
   const SubmitSignUp = () => {
+
+    if(churchAttendance){
+      if(!churchName){
+        alert('교회 이름을 적어주세요.')
+        return
+      }
+      if(!churchDuty){
+        alert('교회 직분을 적어주세요.')
+      }
+    }
+
+    const phone_number= phoneNumber.slice(0,3) + "-" + phoneNumber.slice(3,7) + "-" + phoneNumber.slice(7,11);
+    console.log(phone_number);
+    return;
+
+
     const profile = {
       profileImg: Image,
       name: name,
@@ -104,29 +131,42 @@ const ProfileUpdate = () => {
               <ProfileLabel for="profilePhoneNumber">핸드폰 번호</ProfileLabel>
               <ProfileInput
                 id="profilePhoneNumber"
-                placeholder="핸드폰 번호를 적어주세요."
+                placeholder="번호 만 적어주세요."
                 value={phoneNumber}
                 onChange={changePhoneNumber}
               />
             </ProfilePhoneNumber>
-            <ChurchName>
-              <ProfileLabel for="churchName">교회 이름</ProfileLabel>
-              <ProfileInput
-                id="churchName"
-                placeholder="교회를 다니신다면 교회 이름을 적어주세요."
-                value={churchName}
-                onChange={changeChurchName}
-              />
-            </ChurchName>
-            <ChurchDuty>
-              <ProfileLabel for="churchDuty">교회 직분</ProfileLabel>
-              <ProfileInput
-                id="churchDuty"
-                onChange={changeChurchDuty}
-                value={churchDuty}
-                placeholder="교회를 다니신다면 교회 직분을 적어주세요."
-              />
-            </ChurchDuty>
+            <ChurchAttendance>
+              <ProfileLabel for="churchAttendance" >교회 출석여부</ProfileLabel>
+              <ProfileSelect id="churchAttendance" onChange={changeChurchAttendance} >
+                <option value="">교회 출석여부를 선택해주세요.</option>
+                <option value="true">교회를 다닙니다.</option>
+                <option value="">교회를 다니지 않습니다.</option>
+              </ProfileSelect>
+            </ChurchAttendance>
+            {churchAttendance?
+            <>
+              <ChurchName>
+                <ProfileLabel for="churchName">교회 이름</ProfileLabel>
+                <ProfileInput
+                  id="churchName"
+                  placeholder="교회 이름을 적어주세요."
+                  value={churchName}
+                  onChange={changeChurchName}
+                  />
+              </ChurchName>
+              <ChurchDuty>
+                <ProfileLabel for="churchDuty">교회 직분</ProfileLabel>
+                <ProfileInput
+                  id="churchDuty"
+                  onChange={changeChurchDuty}
+                  value={churchDuty}
+                  placeholder="교회 직분을 적어주세요."
+                  />
+              </ChurchDuty>
+            </>
+            :
+            null}
             <UserJob>
               <ProfileLabel for="userJob" style={{marginBottom:"12px"}}>직업</ProfileLabel>
               <ProfileSelect id="userJob" onChange={changeUserJob} >
@@ -141,7 +181,7 @@ const ProfileUpdate = () => {
               </ProfileSelect>
             </UserJob>
           </ProfileUpdateBody>
-          {Image && name && nickname && churchName && churchDuty && phoneNumber && userJob? 
+          {Image && name && nickname && phoneNumber && userJob? 
           <ProfileUpdateBottom>
             <ProfileSubmitBtn onClick={()=>{
               SubmitSignUp()
@@ -168,8 +208,7 @@ const ProfileUpdateBox = styled.div`
   width: 100%;
   margin-top: 50px;
   margin-bottom: 60px;
-  flex-direction: column;
-  padding: 0px 30px;
+1  padding: 0px 30px;
   box-sizing: border-box;
 `
 
@@ -188,6 +227,7 @@ const ProfileUpdateBody = styled.div`
 `
 
 const ProfileUpdateBottom = styled.div`
+
 `
 
 const ProfileSubmitBtn = styled.div`
@@ -231,16 +271,25 @@ const ProfilePhoneNumber = styled.div`
   margin-top: 15px;
 `
 
+const ChurchAttendance = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+
+`
+
 const ChurchName = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+  transition: all 0.3s;
 `
 
 const ChurchDuty = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+  transition: all 0.3s;
 `
 
 const UserJob = styled.div`

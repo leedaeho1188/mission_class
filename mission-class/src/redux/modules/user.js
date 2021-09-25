@@ -32,9 +32,8 @@ const userSlice = createSlice({
 const SocialLogin = () => {
   return function(dispatch){
     axios
-      .get(`/auth/user`)
+      .get(`/user`)
       .then((res) => {
-        consoleLog(res,"user.js");
         dispatch(
           setUser(res.data)
         )
@@ -45,7 +44,7 @@ const SocialLogin = () => {
         }
       })
       .catch((err)=>{
-        consoleLog(err);
+        console.log(err);
       })
   }
 }
@@ -53,7 +52,7 @@ const SocialLogin = () => {
 const LoginCheck = () => {
   return function (dispatch){
     axios
-      .get(`/auth/user`)
+      .get(`/user`)
       .then((res) => {
         dispatch(
           setUser(res.data)
@@ -82,10 +81,10 @@ const UpdateUserProfile = (profile) => {
       formData.append('phoneNumber', profile.phoneNumber);
       formData.append('introduce', profile.introduce);
       axios
-        .patch(`/auth/user`, formData)
+        .patch(`/user/register`, formData)
         .then((res) => {
           console.log(res.data)
-          alert('회원가입을 축하드립니다.')
+          setUser(res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -100,16 +99,30 @@ const UpdateUserProfile = (profile) => {
       formData.append('phoneNumber', profile.phoneNumber);
       formData.append('introduce', profile.introduce);
       axios
-        .patch(`/auth/user`, formData)
+        .patch(`/user/register`, formData)
         .then((res) => {
           console.log(res.data)
-          alert('회원가입을 축하드립니다.')
+          setUser(res.data)
         })
         .catch((err) => {
           console.log(err)
         })
     }
 
+  }
+}
+
+const ApplyAdmin = (application) => {
+  return function (dispatch, getState){
+    axios
+      .post(`/manager`, application)
+      .then((res) => {
+        console.log(res)
+        alert('신청되었습니다!')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 
@@ -122,6 +135,7 @@ export const api = {
   SocialLogin,
   LoginCheck,
   UpdateUserProfile,
+  ApplyAdmin,
 };
 
 export default userSlice.reducer;

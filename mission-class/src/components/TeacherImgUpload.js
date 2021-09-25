@@ -3,14 +3,12 @@ import styled from 'styled-components';
 import {useDispatch, useSelector} from "react-redux";
 import swal from "sweetalert";
 import heic2any from "heic2any";
-import {setPreview} from '../redux/modules/user';
+import {setTeacherImgPreview} from '../redux/modules/class';
 
-const ProfileImgUpload = (props) => {
+const TeacherImgUpload = (props) => {
   const dispatch = useDispatch();
-  const user_info = useSelector((state) => state.user.user);
-  const preview = useSelector((state) => state.user.preview);
-  const image = preview? preview : user_info.profileImg;
   const fileInput = React.useRef();
+  const image = useSelector((state) => state.class.teacherImg? state.class.teacherImg:"https://jejuhydrofarms.com/wp-content/uploads/2020/05/blank-profile-picture-973460_1280.png");
 
   const selectFile = (e) => {
     const reader = new FileReader();
@@ -32,7 +30,7 @@ const ProfileImgUpload = (props) => {
         props.setTeacherImg(file)
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-        dispatch(setPreview(reader.result))
+        dispatch(setTeacherImgPreview(reader.result))
     }
       })
       .catch(function (x){
@@ -48,10 +46,10 @@ const ProfileImgUpload = (props) => {
         })
         return
       }
-      props.setImage(file)
+      props.setTeacherImg(file)
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-        dispatch(setPreview(reader.result))
+        dispatch(setTeacherImgPreview(reader.result))
       }
     }
   }
@@ -63,12 +61,13 @@ const ProfileImgUpload = (props) => {
           onChange={selectFile} ref={fileInput}/>
     </ImageLabel>  
   )
+
 }
 
 const ImageLabel = styled.label`
   display: block;
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   border-radius: 75px;
   background-position: center;
   background-size: cover;
@@ -76,14 +75,15 @@ const ImageLabel = styled.label`
   position: relative;
   border: solid 0.1px #000000;
   box-shadow: 0px 5px 10px #00000029;
-`
+  margin: auto;
+  `
 
 const ImageIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   position: absolute;
-  top: 70px;
-  right: 6px;
+  top: 90px;
+  right: 4px;
   border-radius: 30px;
   background: white;
   padding: 3px;
@@ -92,4 +92,4 @@ const ImageIcon = styled.img`
 
 `;
 
-export default ProfileImgUpload;
+export default TeacherImgUpload;
